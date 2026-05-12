@@ -1,0 +1,209 @@
+# Common `chrono` Methods / Classes with Examples
+
+---
+
+# 1. `now()`
+
+Gets current time.
+
+```cpp id="a1b2c3"
+auto start = chrono::high_resolution_clock::now();
+```
+
+---
+
+# 2. `count()`
+
+Returns numeric value of duration.
+
+```cpp id="d4e5f6"
+cout << duration.count();
+```
+
+---
+
+# 3. `duration_cast<>()`
+
+Converts duration into another unit.
+
+```cpp id="g7h8i9"
+auto ms = duration_cast<milliseconds>(stop - start);
+```
+
+---
+
+# 4. `system_clock`
+
+Gets current system time.
+
+```cpp id="j1k2l3"
+auto now = chrono::system_clock::now();
+```
+
+---
+
+# 5. `steady_clock`
+
+Stable clock for measuring time.
+
+```cpp id="m4n5o6"
+auto t = chrono::steady_clock::now();
+```
+
+---
+
+# 6. `high_resolution_clock`
+
+Highest precision clock.
+
+```cpp id="p7q8r9"
+auto t = chrono::high_resolution_clock::now();
+```
+
+---
+
+# 7. `seconds`
+
+Creates seconds duration.
+
+```cpp id="s1t2u3"
+chrono::seconds sec(5);
+```
+
+---
+
+# 8. `milliseconds`
+
+Creates milliseconds duration.
+
+```cpp id="v4w5x6"
+chrono::milliseconds ms(500);
+```
+
+---
+
+# 9. `microseconds`
+
+Creates microseconds duration.
+
+```cpp id="y7z8a9"
+chrono::microseconds us(100);
+```
+
+---
+
+# 10. `nanoseconds`
+
+Creates nanoseconds duration.
+
+```cpp id="b1c2d3"
+chrono::nanoseconds ns(1000);
+```
+
+---
+
+# 11. `minutes`
+
+Creates minutes duration.
+
+```cpp id="e4f5g6"
+chrono::minutes min(2);
+```
+
+---
+
+# 12. `hours`
+
+Creates hours duration.
+
+```cpp id="h7i8j9"
+chrono::hours hr(1);
+```
+
+---
+
+# 13. `sleep_for()`
+
+Pauses execution for given time.
+
+```cpp id="k1l2m3"
+this_thread::sleep_for(chrono::seconds(2));
+```
+
+Sleep for 2 seconds.
+
+---
+
+# 14. `sleep_until()`
+
+Sleep until specific time point.
+
+```cpp id="n4o5p6"
+auto wakeup = chrono::steady_clock::now() + chrono::seconds(5);
+
+this_thread::sleep_until(wakeup);
+```
+
+---
+
+# 15. `time_since_epoch()`
+
+Time elapsed since Jan 1, 1970.
+
+```cpp id="q7r8s9"
+auto now = chrono::system_clock::now();
+
+cout << now.time_since_epoch().count();
+```
+
+---
+
+# Full Example Program
+
+```cpp id="t1u2v3"
+#include <iostream>
+#include <chrono>
+#include <thread>
+
+using namespace std;
+using namespace chrono;
+
+int main() {
+
+    auto start = high_resolution_clock::now();
+
+    this_thread::sleep_for(seconds(2));
+
+    auto stop = high_resolution_clock::now();
+
+    auto duration = duration_cast<milliseconds>(stop - start);
+
+    cout << "Time: " << duration.count() << " ms";
+
+    return 0;
+}
+```
+
+---
+
+# Output
+
+```text id="w4x5y6"
+Time: 2000 ms
+```
+
+---
+
+# Simple Summary Table
+
+| Method / Class       | Example                         |
+| -------------------- | ------------------------------- |
+| `now()`              | `high_resolution_clock::now()`  |
+| `count()`            | `duration.count()`              |
+| `duration_cast<>`    | `duration_cast<milliseconds>()` |
+| `seconds`            | `seconds(5)`                    |
+| `milliseconds`       | `milliseconds(500)`             |
+| `microseconds`       | `microseconds(100)`             |
+| `sleep_for()`        | `sleep_for(seconds(2))`         |
+| `sleep_until()`      | `sleep_until(time)`             |
+| `time_since_epoch()` | `now.time_since_epoch()`        |
