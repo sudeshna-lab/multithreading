@@ -1,0 +1,26 @@
+#include <iostream>
+#include<chrono>
+#include<thread>
+ 
+using namespace std;
+
+void run(int i)
+{ 
+    while(i++ < 10)
+    {
+        cout << "cppnut =  "  << i << endl;
+    }
+    
+  //std::this_thread::sleep_for(chrono::seconds(5));
+};
+
+int main()
+{
+    std::thread t1(run,0);
+    cout << "main start" << endl;
+   // t1.join();
+    t1.detach();
+    cout << "main after" << endl;
+    std::this_thread::sleep_for(chrono::seconds(5));
+    return 0;
+}
